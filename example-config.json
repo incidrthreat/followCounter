@@ -6,5 +6,6 @@
     "tokens":{
         "accessToken":"ACCESS TOKEN",
         "accessTokenSecret":"ACCESS TOKEN SECRET"
-    }
+    },
+    "user":"USERNAME HERE"
 }
