@@ -1,0 +1,10 @@
+{
+    "consumer":{
+        "apiKey":"API KEY",
+        "apiSecretKey":"API SECRET KEY"
+    },
+    "tokens":{
+        "accessToken":"ACCESS TOKEN",
+        "accessTokenSecret":"ACCESS TOKEN SECRET"
+    }
+}
