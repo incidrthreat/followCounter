@@ -1,4 +1,4 @@
-import json, tweepy
+import json, tweepy, time
 
 from flask import Flask, render_template, Response, json
 
@@ -36,10 +36,15 @@ def auth():
 Get/return follower count
 """
 def get_followers():
-    follower_count = str(api.get_user(user).followers_count)
-    yield "data: {}\n\n".format(follower_count)
+    while True:
+        try:
+            follower_count = str(api.get_user(user).followers_count)
+            yield "data: {}\n\n".format(follower_count)
+        except tweepy.RateLimitError:
+            print("Rate Limit Error")
+            time.sleep(15 * 60)
 
 
 if __name__ == "__main__":
     auth()
-    app.run(threaded=True)
+    app.run(host='0.0.0.0', threaded=True)
