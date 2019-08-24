@@ -1,30 +1,33 @@
-import json, tweepy, string
+import json, tweepy
 
-from flask import Flask
+from flask import Flask, render_template, Response, json
 
 app = Flask(__name__)
 
+global user, socketKey
+with open('config.json') as config_file:
+        data = json.load(config_file)
 
-@app.route("/")
-def home():
-    auth()
-    return "{} has {} followers!".format(user.capitalize(), str(get_followers()))
+apiKey = data['consumer']['apiKey']
+apiSecretKey = data['consumer']['apiSecretKey']
+accessToken = data['tokens']['accessToken']
+accessTokenSecret = data['tokens']['accessTokenSecret']
+user = data['user']
+
+@app.route('/')
+def index():
+	return render_template('index.html', value=user.capitalize())
+
+@app.route("/update")
+def send_count():
+    return Response(get_followers(), mimetype="text/event-stream")
 
     
 """
 Get data from config.json
 """
-def auth():
-    global api, user
-    with open('config.json') as config_file:
-        data = json.load(config_file)
-
-    apiKey = data['consumer']['apiKey']
-    apiSecretKey = data['consumer']['apiSecretKey']
-    accessToken = data['tokens']['accessToken']
-    accessTokenSecret = data['tokens']['accessTokenSecret']
-    user = data['user']
-    
+def auth():   
+    global api 
     auth = tweepy.OAuthHandler(apiKey, apiSecretKey)
     auth.set_access_token(accessToken, accessTokenSecret)
     api = tweepy.API(auth)
@@ -33,8 +36,10 @@ def auth():
 Get/return follower count
 """
 def get_followers():
-    return api.get_user(user).followers_count
-    
+    follower_count = str(api.get_user(user).followers_count)
+    yield "data: {}\n\n".format(follower_count)
+
 
 if __name__ == "__main__":
-    app.run()
+    auth()
+    app.run(threaded=True)
