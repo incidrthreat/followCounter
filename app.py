@@ -16,7 +16,7 @@ user = data['user']
 
 @app.route('/')
 def index():
-	return render_template('index.html', value=user.capitalize())
+    return render_template('index.html', value=user.capitalize())
 
 @app.route("/update")
 def send_count():
