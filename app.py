@@ -1,5 +1,5 @@
 import json, tweepy, time
-from flask import Flask, render_template, Response, json
+from flask import Flask, render_template, Response
 
 app = Flask(__name__)
 
