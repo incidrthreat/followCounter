@@ -51,36 +51,28 @@ Get/return follower count
 """
 def get_followers():
     while True:
-        try:
-            follower_count = str(api.get_user(user).followers_count)
-            yield "data: {}\n\n".format(follower_count)
-        except tweepy.RateLimitError:
-            print("Followers rate limit reached.")
-            time.sleep(15 * 60)
+        follower_count = str(api.get_user(user).followers_count)
+        yield "data: {}\n\n".format(follower_count)
+        time.sleep(5)
 
 """
 Get/return number of tweets
 """
 def get_num_tweets():
     while True:
-        try:
-            tweet_count = str(api.get_user(user).statuses_count)
-            yield "data: Number of combined tweets/retweets: {}\n\n".format(tweet_count)
-        except tweepy.RateLimitError:
-            print("Tweet count rate limit reached.")
-            time.sleep(15 * 60)
+        tweet_count = str(api.get_user(user).statuses_count)
+        yield "data: Number of combined tweets/retweets: {}\n\n".format(tweet_count)
+        time.sleep(5)
+
 
 """
 Get/return number of liked tweets
 """
 def get_num_likes():
     while True:
-        try:
-            likes_count = str(api.get_user(user).favourites_count)
-            yield "data: Total Tweets {} has liked: {}\n\n".format(user, likes_count)
-        except tweepy.RateLimitError:
-            print("Likes count rate limit reached.")
-            time.sleep(15 * 60)
+        likes_count = str(api.get_user(user).favourites_count)
+        yield "data: Total Tweets {} has liked: {}\n\n".format(user, likes_count)
+        time.sleep(5)
 
 
 if __name__ == "__main__":
