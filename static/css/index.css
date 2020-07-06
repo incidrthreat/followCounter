@@ -6,10 +6,8 @@ body {
     background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
     background-size: 100%;
 }
-p {
-    margin: 0;
-    padding: 0;
-}
+
+
 
 
 #followerContainer {
@@ -19,17 +17,29 @@ p {
     position: absolute;
     left: 50%;
     top: 50%;
+    width: 95%;
     transform: translate(-50%, -50%);
     color: #daf6ff;
-    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);    
-    .text {
-        letter-spacing: 0.1em;
-        font-size: 14px;
-        padding: 20px 0 0;
-    }
-    
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);       
 }
+
 .odometer {
         font-size: 100px;
         text-shadow: none;
-    }
+}
+
+#followCount {
+    font-size: 55px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+#numTweets {
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+#numLikes {
+    padding: 5px 5px;
+    font-weight: bold;
+}
